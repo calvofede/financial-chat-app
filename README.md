@@ -4,19 +4,22 @@
 * [Setup](#setup)
 
 ## General info
-This project is simple Lorem ipsum dolor generator.
+Browser-based chat application using Node.JS.
+This application should allow several users to talk in a chatroom and also to get stock quotes
+from an API using a specific command.
 	
 ## Technologies
 Project is created with:
-* Lorem version: 12.3
-* Ipsum version: 2.33
-* Ament library version: 999
-	
+* Express version: 4
+* Socket IO: 3
+* Mongoose: 5
+* Passport: 0.4.1	
+
 ## Setup
 To run this project, install it locally using npm:
 
 ```
-$ cd ../lorem
+$ cd ../jobsity-financial-chat
 $ npm install
 $ npm start
 ```

@@ -3,41 +3,6 @@
     word-wrap: break-word;
 }
 
-
-.chat {
-    display: flex;
-    
-    /* column reverse to have chat-style message ordering*/
-    flex-direction: column-reverse;
-  }
-  
-  .message {
-    border: 1px gray;
-    margin: 5px;
-    padding: 5px;
-    width: 60%;
-  }
-  
-  .message.out {
-    background: rgb(220, 248, 198);
-    
-    /* use align-self */
-    align-self: flex-end;
-  }
-  .message.in {
-    background: white;
-  }
-
-
-  /* LOGIN PAGE */
-
-
-/* BASIC */
-
-html {
-  background-color: #56baed;
-}
-
 body {
   font-family: "Poppins", sans-serif;
   height: 100vh;
@@ -59,8 +24,6 @@ h2 {
   margin: 40px 8px 10px 8px; 
   color: #cccccc;
 }
-
-
 
 /* STRUCTURE */
 

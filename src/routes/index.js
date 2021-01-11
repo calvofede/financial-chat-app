@@ -1,5 +1,4 @@
 const express = require('express');
-const messageController = require('../components/message/message-controller');
 const router = express.Router();
 const { mustBeAuth } = require('../config/auth');
 
@@ -12,11 +11,9 @@ router.get('/register', (req, res) => {
 })
 
 router.get('/chatroom', mustBeAuth, (req, res) => {
-    res.render('chatroom')
+    res.render('chatroom',{
+        user: req.user
+    })
 })
-
-router.get('/messages', messageController.getMessages);
-
-router.post('/messages', messageController.postMessage);
 
 module.exports = router;

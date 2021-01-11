@@ -15,18 +15,18 @@
 
 <body>
     <div class="container">
+        <div id="messages">
+        </div>
         <br>
         <div class="jumbotron">
-            <h1 class="display-4">Send Message</h1>
+            <h3 class="display-5">Hi <%= user.name %>
+            </h3>
             <br>
-            <input id="name" class="form-control" placeholder="Name">
+            <textarea id="message" class="form-control" placeholder="Type a new message"></textarea>
             <br>
-            <textarea id="message" class="form-control" placeholder="Your Message Here">
-            </textarea>
+            <button id="send" class="btn btn-primary btn-block">Send</button>
             <br>
-            <button id="send" class="btn btn-success">Send</button>
-        </div>
-        <div id="messages">
+            <a class="logout" href="/users/logout">Logout</a>
 
         </div>
     </div>

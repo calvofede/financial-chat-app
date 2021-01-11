@@ -1,6 +1,5 @@
-const messageService = require('./message-service');
+const messageService = require('./MessageService');
 const { getMessagesService, postMessageService } = messageService;
-const Message = require('./message');
 
 const getMessages = async (req, res, next) => {
     try {
@@ -15,7 +14,9 @@ const getMessages = async (req, res, next) => {
 
 const postMessage = async (req, res, next) => {
     try {
-        const message = new Message(req.body);
+        const message  = req.body;
+        message.name = req.user.name;
+        
         const io = req.app.get('socketio');
 
         await postMessageService(message, io);

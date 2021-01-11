@@ -1,5 +1,5 @@
-const Message = require('./message/message');
-const User = require('./user/user');
+const Message = require('./message/MessageModel');
+const User = require('./user/UserModel');
 
 const getMessagesDb = async (LIMIT) => {
     try {

@@ -6,6 +6,7 @@ $(() => {
          name: $("#name").val(),
          message: $("#message").val()
       });
+      $("#message").val('');
    })
    getMessages()
 })

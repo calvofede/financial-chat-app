@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const LocalStrategy = require('passport-local').Strategy;
-const User = require('../components/user/user');
+const User = require('../components/user/UserModel');
 const dal = require('../components/dal')
 const { findUserByEmail } = dal;
 
