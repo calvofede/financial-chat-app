@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const appConfig = require('./app');
 
-const MONGO_URL = `mongodb://${appConfig.dbUrl}/${appConfig.dbSchema}`
+const MONGO_URL = `mongodb://mongo/${appConfig.dbSchema}`
 
 mongoose.connect(MONGO_URL, {
   useNewUrlParser: true,

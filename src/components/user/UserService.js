@@ -1,6 +1,6 @@
 const dal = require('../dal');
 const { createUserDb, findUserByEmail } = dal;
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const appConfig = require('../../config/app');
 const User = require('../user/UserModel');
 

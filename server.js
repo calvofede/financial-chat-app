@@ -6,7 +6,7 @@ const io = require('socket.io')(http);
 const mongo = require('./src/config/mongo');
 const appConfig = require('./src/config/app');
 const passport = require('passport');
-require("./src/config/passport")(passport)
+require("./src/config/Passport")(passport)
 const session = require('express-session');
 const flash = require('connect-flash');
 const expressEjsLayout = require('express-ejs-layouts');
