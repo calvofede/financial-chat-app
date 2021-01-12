@@ -9,8 +9,9 @@ const passport = require('passport');
 require("./src/config/passport")(passport)
 const session = require('express-session');
 const flash = require('connect-flash');
-const expressEjsLayout = require('express-ejs-layouts')
-const { Consumer } = require('./src/components/Kafka');
+const expressEjsLayout = require('express-ejs-layouts');
+const { Consumer } = require('./src/components/KafkaConsumer');
+const  Message = require('./src/components/message/MessageModel');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}))
@@ -42,7 +43,10 @@ const server = http.listen(appConfig.port, () => {
 });
 
 io.on('connection', () => {
-    console.log('An User was connected...')
-})
-
-Consumer.start();
+    console.log('An User was connected...');
+    const eventHandler = (message) => {
+        const newMessage = new Message({message: message, name: 'Bot', date: Date.now});
+        io.emit("message", newMessage);
+    };
+    Consumer.start(eventHandler);
+});
