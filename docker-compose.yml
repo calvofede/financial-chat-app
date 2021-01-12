@@ -1,12 +1,14 @@
-version: "3"
+version: "2"
 services:
   app:
-    container_name: app
+    container_name: financial-chat
     restart: always
     build: .
     ports:
       - "3000:3000"
     links:
+      - mongo
+    depends_on:
       - mongo
   mongo:
     container_name: mongo

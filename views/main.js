@@ -2,6 +2,8 @@ const socket = io();
 
 $(() => {
    $("#send").click(() => {
+      if ($('#message').val() === '') 
+         return;
       sendMessage({
          name: $("#name").val(),
          message: $("#message").val()

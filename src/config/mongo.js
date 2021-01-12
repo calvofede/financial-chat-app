@@ -1,23 +1,20 @@
 const mongoose = require('mongoose');
-const appConfig = require('./app');
 
-const MONGO_URL = `mongodb://mongo/${appConfig.dbSchema}`
-
-mongoose.connect(MONGO_URL, {
+mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
 
 mongoose.connection.on('connected', () => {
-  console.log('Mongo has connected succesfully')
+  console.log('Mongo has connected succesfully');
 })
 mongoose.connection.on('reconnected', () => {
-  console.log('Mongo has reconnected')
+  console.log('Mongo has reconnected');
 })
 mongoose.connection.on('error', error => {
   console.log('Mongo connection has an error', error)
   mongoose.disconnect()
 })
 mongoose.connection.on('disconnected', () => {
-  console.log('Mongo connection is disconnected')
+  console.log('Mongo connection is disconnected');
 })

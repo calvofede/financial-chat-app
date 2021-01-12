@@ -6,10 +6,9 @@ const register = async(req, res, next) => {
         const { name, email, password, password2 } = req.body;
         
         if (password != password2)
-            throw new Error('password confirmation wrong!');
+            throw new Error('Error, password confirmation wrong!');
 
         await registerUser(name, email, password);
-        req.flash('success_msg','You have now registered!');
         res.redirect('/users/login');
         next();
     } catch(e) {

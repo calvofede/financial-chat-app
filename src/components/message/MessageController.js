@@ -15,10 +15,7 @@ const getMessages = async (req, res, next) => {
 const postMessage = async (req, res, next) => {
     try {
         const reqMessage  = { ...req.body, name: req.user.name };
-
-        const io = req.app.get('socketio');
-
-        await postMessageService(reqMessage, io);
+        await postMessageService(reqMessage);
         res.sendStatus(200);
         next();
     } catch(e) {

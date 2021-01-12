@@ -9,22 +9,11 @@ const getMessagesDb = async (LIMIT) => {
     }
 }
 
-const postMessageDb = async (message) => {
+const insertDb = async (model) => {
     try {
-        message.save((err) => {
+        model.save((err) => {
             if (err)
-                throw new Error('error, unable to insert message', err);
-        })
-    } catch (e) {
-        throw new Error(e);
-    }
-}
-
-const createUserDb = async (user) => {
-    try {
-        user.save((err) => {
-            if (err)
-                throw new Error('error, unable to insert user', err);
+                throw new Error('error, unable to insert on db', err);
         })
     } catch (e) {
         throw new Error(e);
@@ -37,7 +26,6 @@ const findUserByEmail = async (email) => {
 
 module.exports = {
     getMessagesDb,
-    postMessageDb,
-    createUserDb,
+    insertDb,
     findUserByEmail
 }

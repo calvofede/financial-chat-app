@@ -1,7 +1,7 @@
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('../components/user/UserModel');
-const dal = require('../components/dal')
+const dal = require('../components/Dal')
 const { findUserByEmail } = dal;
 
 module.exports = function (passport) {
@@ -10,7 +10,7 @@ module.exports = function (passport) {
             findUserByEmail(email)
                 .then((user) => {
                     if (!user) {
-                        return done(null, false, { message: 'email not found!' });
+                        return done(null, false);
                     }
                     bcrypt.compare(password, user.password, (err, isMatch) => {
                         if (err) throw err;
@@ -18,7 +18,7 @@ module.exports = function (passport) {
                         if (isMatch) {
                             return done(null, user);
                         } else {
-                            return done(null, false, { message: 'wrong password' });
+                            return done(null, false);
                         }
                     })
                 })

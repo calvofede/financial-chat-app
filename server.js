@@ -1,52 +1,36 @@
+require('dotenv').config()
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const http = require('http').Server(app);
-const io = require('socket.io')(http);
-const mongo = require('./src/config/mongo');
-const appConfig = require('./src/config/app');
+var io = exports.io = require('socket.io')(http);
+require('./src/config/Mongo');
 const passport = require('passport');
 require("./src/config/Passport")(passport)
 const session = require('express-session');
-const flash = require('connect-flash');
 const expressEjsLayout = require('express-ejs-layouts');
-const { Consumer } = require('./src/components/KafkaConsumer');
-const  Message = require('./src/components/message/MessageModel');
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.static(__dirname + '/views'));
 app.use(session({
     secret: 'secret',
     resave: true,
     saveUninitialized: true
 }));
-app.use(flash());
-app.use((req,res,next)=> {
-  res.locals.success_msg = req.flash('success_msg');
-  res.locals.error_msg = req.flash('error_msg');
-  res.locals.error  = req.flash('error');
-next();
-})
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.set('socketio', io);
-app.set('view engine','ejs');
+app.set('view engine', 'ejs');
 app.use(expressEjsLayout);
 
-app.use('/',require('./src/routes/index'), require('./src/components/message/MessageRoutes'));
-app.use('/users',require('./src/components/user/UserRoutes'));
-
-const server = http.listen(appConfig.port, () => {
-    console.log('Listening on port ' + appConfig.port);
+http.listen(process.env.PORT, () => {
+    console.log('Listening on port ' + process.env.PORT);
 });
 
 io.on('connection', () => {
     console.log('An User was connected...');
-    const eventHandler = (message) => {
-        const newMessage = new Message({message: message, name: 'Bot', date: Date.now});
-        io.emit("message", newMessage);
-    };
-    Consumer.start(eventHandler);
 });
+
+app.use('/', require('./src/routes/index'), require('./src/components/message/MessageRoutes'));
+app.use('/users', require('./src/components/user/UserRoutes'));

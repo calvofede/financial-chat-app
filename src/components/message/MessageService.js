@@ -1,36 +1,38 @@
-const dal = require('../dal');
+const dal = require('../Dal');
 const Message = require('./MessageModel');
-const { getMessagesDb, postMessageDb } = dal;
-const appConfig = require('../../config/app');
-const { maxMessages } = appConfig;
-const { callBot } = require('./../utils/BotService');
+const { getMessagesDb, insertDb } = dal;
+const { io } = require('../../../server');
+const { callBot } = require('../../utils/BotService');
 
 const getMessagesService = async () => {
     try {
+        const maxMessages = parseInt(process.env.MAX_MESSAGES);
         return await getMessagesDb(maxMessages);
     } catch (e) {
         throw new Error(e);
     }
 }
 
-const postMessageService = async (reqMessage, io) => {
+const postMessageService = async (newMessage) => {
     try {
-        if (reqMessage.message.includes('/')) {
-            const command = reqMessage.message;
-            callBot(command);
+        if (callBot(newMessage.message)) {
             return;
         } else {
-            const newMessage = new Message(reqMessage);
-            await postMessageDb(newMessage);
-            io.emit('message', newMessage);
-            return;
+            return await saveAndEmitMessage(newMessage);
         }
     } catch (e) {
         throw new Error(e);
     }
 }
 
+const saveAndEmitMessage = async(message) => {
+    const newMessage = new Message(message);
+    await insertDb(newMessage);
+    io.emit('message', newMessage);
+}
+
 module.exports = {
     getMessagesService,
-    postMessageService
+    postMessageService,
+    saveAndEmitMessage
 }
