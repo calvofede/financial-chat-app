@@ -14,12 +14,11 @@ const getMessages = async (req, res, next) => {
 
 const postMessage = async (req, res, next) => {
     try {
-        const message  = req.body;
-        message.name = req.user.name;
-        
+        const reqMessage  = { ...req.body, name: req.user.name };
+
         const io = req.app.get('socketio');
 
-        await postMessageService(message, io);
+        await postMessageService(reqMessage, io);
         res.sendStatus(200);
         next();
     } catch(e) {

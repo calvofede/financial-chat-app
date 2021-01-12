@@ -10,6 +10,7 @@ require("./src/config/passport")(passport)
 const session = require('express-session');
 const flash = require('connect-flash');
 const expressEjsLayout = require('express-ejs-layouts')
+const { Consumer } = require('./src/components/Kafka');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}))
@@ -43,3 +44,5 @@ const server = http.listen(appConfig.port, () => {
 io.on('connection', () => {
     console.log('An User was connected...')
 })
+
+Consumer.start();
