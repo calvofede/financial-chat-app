@@ -2,7 +2,7 @@ const kafka = require("kafka-node");
 
 Kafka = module.exports;
 
-const getConsumer = () => {
+const getConsumer = (eventHandler) => {
 
     const client = new kafka.KafkaClient({ kafkaHost: process.env.MESSAGE_BROKER_HOST });
 
@@ -28,6 +28,9 @@ const getConsumer = () => {
         console.log("I am ready");
     });
     consumer.on("message", function (message) {
+
+        eventHandler(message);
+
         console.log("Hey got message", message);
     });
     consumer.on("error", function (err) {
