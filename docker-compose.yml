@@ -1,4 +1,4 @@
-version: "2"
+version: "3.7"
 services:
   app:
     container_name: financial-chat
@@ -13,7 +13,5 @@ services:
   mongo:
     container_name: mongo
     image: mongo
-    volumes:
-      - ./data:/data/db
     ports:
       - "27017:27017"
