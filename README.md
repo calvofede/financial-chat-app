@@ -25,6 +25,8 @@ $ npm install
 $ npm start
 ```
 
+You need to have MongoDB server running locally.
+
 First you need to register a user:
 ```
 localhost:3000/users/register
