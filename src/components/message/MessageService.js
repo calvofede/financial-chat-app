@@ -27,7 +27,7 @@ const postMessageService = async (newMessage) => {
 }
 
 const eventHandler = (message) => {
-    const newMessage = new Message({message: message.value, name: 'Bot', date: Date.now});
+    const newMessage = new Message({message: message.value, name: 'StockBot', date: Date.now});
     saveAndEmitMessage(newMessage);
 };
 

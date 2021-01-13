@@ -8,7 +8,7 @@ const callBot = (command) => {
         axios.get(`${process.env.BOT_HOST}${process.env.STOCK_BOT}${ticker}`);
         return true;
     } catch (e) {
-        console.log(e);
+        console.error(e);
         return false;
     }
 }

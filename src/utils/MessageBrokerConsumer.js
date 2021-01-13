@@ -28,10 +28,7 @@ const getConsumer = (eventHandler) => {
         console.log("I am ready");
     });
     consumer.on("message", function (message) {
-
         eventHandler(message);
-
-        console.log("Hey got message", message);
     });
     consumer.on("error", function (err) {
         console.log("error", err);

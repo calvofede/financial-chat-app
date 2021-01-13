@@ -9,6 +9,7 @@ const passport = require('passport');
 require("./src/config/Passport")(passport)
 const session = require('express-session');
 const expressEjsLayout = require('express-ejs-layouts');
+const logger = require('morgan');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -24,12 +25,10 @@ app.use(passport.session());
 app.set('view engine', 'ejs');
 app.use(expressEjsLayout);
 
+app.use(logger('dev'));
+
 http.listen(process.env.PORT, () => {
     console.log('Listening on port ' + process.env.PORT);
-});
-
-io.on('connection', () => {
-    console.log('An User was connected...');
 });
 
 app.use('/', require('./src/routes/index'), require('./src/components/message/MessageRoutes'));
