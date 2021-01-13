@@ -24,9 +24,17 @@ $ cd ../jobsity-financial-chat
 $ npm install
 $ npm start
 ```
-On first installation a user needs to be registered to start using the chat
 
-This app will be a consumer of messages with topic 'stocksPrice'
+First you need to register a user:
+```
+localhost:3000/users/register
+```
+Then login:
+```
+localhost:3000/users/login
+```
 
-When any user post a message with format /stock=stock_code this app will call
-the bot app that will answer the stock close price.
+Only registered users can access to the chatroom.
+
+Then if kafka and financial-chat-bot are running if any user send '/stock=stock_code' 
+the stock close price will appear and the chat post owner will be 'StockBot'
